@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.147.9">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>🗄️ Chương 4: Thiết lập Amazon RDS :: Workshop: Triển khai ứng dụng với ECS Fargate và CI/CD</title>
+
+    
+    <link href="/css/nucleus.css?1752146990" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1752146990" rel="stylesheet">
+    <link href="/css/hybrid.css?1752146990" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1752146990" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1752146990" rel="stylesheet">
+    <link href="/css/auto-complete.css?1752146990" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1752146990" rel="stylesheet">
+    <link href="/css/theme.css?1752146990" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1752146990" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1752146990" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1752146990"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/vi/4-rds-setup/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1752146990"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1752146990"></script>
+<script type="text/javascript">
+    
+        var baseurl = "http:\/\/localhost:1313\/\/vi";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1752146990"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduction/" title="Chương 1: Giới thiệu tổng quan" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduction/">
+          Chương 1: Giới thiệu tổng quan
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-dockerize/" title="Chương 2: Chuẩn bị dự án &amp; Docker hóa ứng dụng" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/2-dockerize/">
+          Chương 2: Chuẩn bị dự án &amp; Docker hóa ứng dụng
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/3-ecr/" title="Chương 3: Tạo ECR repositories và đẩy image" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/3-ecr/">
+          Chương 3: Tạo ECR repositories và đẩy image
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-deploy-ecs-fargate/" title="Chương 4: Deploy ECS Fargate" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-deploy-ecs-fargate/">
+          Chương 4: Deploy ECS Fargate
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-rds-setup/" title="🗄️ Chương 4: Thiết lập Amazon RDS" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/vi/4-rds-setup/">
+          🗄️ Chương 4: Thiết lập Amazon RDS
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-cloudwatch/" title="Chương 5: Monitoring với Amazon CloudWatch" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-cloudwatch/">
+          Chương 5: Monitoring với Amazon CloudWatch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/6-github-actions/" title="Chương 6: Tự động hóa toàn bộ với GitHub Actions" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/6-github-actions/">
+          Chương 6: Tự động hóa toàn bộ với GitHub Actions
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/7-cleanup/" title="Chương 7: Cleanup &amp; tổng kết" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/7-cleanup/">
+          Chương 7: Cleanup &amp; tổng kết
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3></h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="http://awsstudygroup.com"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - Nhóm FB</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="vi" value="http://localhost:1313/vi/4-rds-setup/" selected>Tiếng Việt</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> </a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830891&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>26-11-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng</a>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='/vi/'>Workshop: Triển khai ứng dụng với ECS Fargate và CI/CD</a> > 🗄️ Chương 4: Thiết lập Amazon RDS
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#mục-tiêu">Mục tiêu</a></li>
+    <li><a href="#bước-1-tạo-rds-instance">Bước 1: Tạo RDS Instance</a>
+      <ul>
+        <li><a href="#11-tạo-rds-từ-aws-console">1.1. Tạo RDS từ AWS Console</a></li>
+        <li><a href="#12-tạo-bằng-aws-cli-alternative">1.2. Tạo bằng AWS CLI (Alternative)</a></li>
+      </ul>
+    </li>
+    <li><a href="#bước-2-cấu-hình-security-groups">Bước 2: Cấu hình Security Groups</a>
+      <ul>
+        <li><a href="#21-tạo-security-group-cho-rds">2.1. Tạo Security Group cho RDS</a></li>
+      </ul>
+    </li>
+    <li><a href="#bước-3-thiết-lập-database-schema">Bước 3: Thiết lập Database Schema</a>
+      <ul>
+        <li><a href="#31-kết-nối-với-rds-instance">3.1. Kết nối với RDS instance</a></li>
+        <li><a href="#32-tạo-database-schema">3.2. Tạo database schema</a></li>
+        <li><a href="#33-tạo-database-user-cho-application">3.3. Tạo database user cho application</a></li>
+      </ul>
+    </li>
+    <li><a href="#bước-4-cấu-hình-backup-và-maintenance">Bước 4: Cấu hình Backup và Maintenance</a>
+      <ul>
+        <li><a href="#41-cấu-hình-automated-backup">4.1. Cấu hình automated backup</a></li>
+        <li><a href="#42-tạo-manual-snapshot">4.2. Tạo manual snapshot</a></li>
+      </ul>
+    </li>
+    <li><a href="#bước-5-cấu-hình-parameter-groups">Bước 5: Cấu hình Parameter Groups</a>
+      <ul>
+        <li><a href="#51-tạo-custom-parameter-group">5.1. Tạo custom parameter group</a></li>
+      </ul>
+    </li>
+    <li><a href="#bước-6-monitoring-và-alerts">Bước 6: Monitoring và Alerts</a>
+      <ul>
+        <li><a href="#61-thiết-lập-cloudwatch-alarms">6.1. Thiết lập CloudWatch alarms</a></li>
+      </ul>
+    </li>
+    <li><a href="#bước-7-testing-và-validation">Bước 7: Testing và Validation</a>
+      <ul>
+        <li><a href="#71-test-connection-từ-api-wrapper">7.1. Test connection từ API wrapper</a></li>
+        <li><a href="#72-performance-testing">7.2. Performance testing</a></li>
+      </ul>
+    </li>
+    <li><a href="#bước-8-backup-và-recovery-testing">Bước 8: Backup và Recovery Testing</a>
+      <ul>
+        <li><a href="#81-test-point-in-time-recovery">8.1. Test point-in-time recovery</a></li>
+        <li><a href="#82-test-snapshot-restore">8.2. Test snapshot restore</a></li>
+      </ul>
+    </li>
+    <li><a href="#troubleshooting">Troubleshooting</a>
+      <ul>
+        <li><a href="#common-issues">Common Issues</a></li>
+        <li><a href="#useful-commands">Useful Commands</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              🗄️ Chương 4: Thiết lập Amazon RDS
+            </h1>
+          
+
+        
+
+
+
+	<h1 id="thiết-lập-amazon-rds">Thiết lập Amazon RDS</h1>
+<p>Trong chương này, chúng ta sẽ thiết lập Amazon RDS làm database hiện đại để thay thế cho hệ thống legacy MySQL. RDS sẽ cung cấp các tính năng như backup tự động, patching, monitoring và high availability.</p>
+<h2 id="mục-tiêu">Mục tiêu</h2>
+<ul>
+<li>Tạo RDS MySQL instance</li>
+<li>Cấu hình security groups và networking</li>
+<li>Thiết lập backup và maintenance</li>
+<li>Tạo database schema tương tự legacy</li>
+<li>Test connection từ API wrapper</li>
+</ul>
+<h2 id="bước-1-tạo-rds-instance">Bước 1: Tạo RDS Instance</h2>
+<h3 id="11-tạo-rds-từ-aws-console">1.1. Tạo RDS từ AWS Console</h3>
+<ol>
+<li>Đăng nhập vào AWS Console</li>
+<li>Chọn service <strong>RDS</strong></li>
+<li>Click <strong>Create database</strong></li>
+<li>Cấu hình như sau:</li>
+</ol>
+<p><strong>Engine Options:</strong></p>
+<ul>
+<li><strong>Engine Type</strong>: MySQL</li>
+<li><strong>Version</strong>: MySQL 8.0.35 (latest)</li>
+<li><strong>Template</strong>: Free tier (cho workshop)</li>
+</ul>
+<p><strong>Settings:</strong></p>
+<ul>
+<li><strong>DB Instance Identifier</strong>: <code>modernized-mysql-db</code></li>
+<li><strong>Master username</strong>: <code>admin</code></li>
+<li><strong>Master password</strong>: <code>SecureRdsPassword123!</code></li>
+</ul>
+<p><strong>DB Instance Class:</strong></p>
+<ul>
+<li><strong>Instance Class</strong>: db.t3.micro (free tier)</li>
+</ul>
+<p><strong>Storage:</strong></p>
+<ul>
+<li><strong>Storage Type</strong>: General Purpose SSD (gp2)</li>
+<li><strong>Allocated Storage</strong>: 20 GB</li>
+<li><strong>Enable Storage Autoscaling</strong>: Yes</li>
+<li><strong>Maximum Storage Threshold</strong>: 100 GB</li>
+</ul>
+<p><strong>Connectivity:</strong></p>
+<ul>
+<li><strong>VPC</strong>: Default VPC</li>
+<li><strong>Subnet group</strong>: Default</li>
+<li><strong>Public access</strong>: No (recommended for production)</li>
+<li><strong>VPC security group</strong>: Create new</li>
+<li><strong>Availability Zone</strong>: No preference</li>
+</ul>
+<p><strong>Database authentication:</strong></p>
+<ul>
+<li><strong>Database authentication</strong>: Password authentication</li>
+</ul>
+<p><strong>Additional configuration:</strong></p>
+<ul>
+<li><strong>Initial database name</strong>: <code>modernized_db</code></li>
+<li><strong>Backup retention</strong>: 7 days</li>
+<li><strong>Backup window</strong>: Default</li>
+<li><strong>Maintenance window</strong>: Default</li>
+<li><strong>Enable Enhanced monitoring</strong>: Yes (60 seconds)</li>
+</ul>
+<h3 id="12-tạo-bằng-aws-cli-alternative">1.2. Tạo bằng AWS CLI (Alternative)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Create DB subnet group</span>
+</span></span><span style="display:flex;"><span>aws rds create-db-subnet-group <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-subnet-group-name modernized-subnet-group <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-subnet-group-description <span style="color:#e6db74">&#34;Subnet group for modernized database&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --subnet-ids subnet-12345678 subnet-87654321
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create security group</span>
+</span></span><span style="display:flex;"><span>aws ec2 create-security-group <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --group-name rds-security-group <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --description <span style="color:#e6db74">&#34;Security group for RDS&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get security group ID</span>
+</span></span><span style="display:flex;"><span>SG_ID<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>aws ec2 describe-security-groups <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --group-names rds-security-group <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --query <span style="color:#e6db74">&#39;SecurityGroups[0].GroupId&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --output text<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add inbound rule for MySQL</span>
+</span></span><span style="display:flex;"><span>aws ec2 authorize-security-group-ingress <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --group-id $SG_ID <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --protocol tcp <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --port <span style="color:#ae81ff">3306</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --cidr 10.0.0.0/8
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create RDS instance</span>
+</span></span><span style="display:flex;"><span>aws rds create-db-instance <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-instance-identifier modernized-mysql-db <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-instance-class db.t3.micro <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --engine mysql <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --master-username admin <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --master-user-password SecureRdsPassword123! <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --allocated-storage <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --vpc-security-group-ids $SG_ID <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-name modernized_db <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --backup-retention-period <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --storage-encrypted <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --monitoring-interval <span style="color:#ae81ff">60</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --monitoring-role-arn arn:aws:iam::YOUR_ACCOUNT:role/rds-monitoring-role
+</span></span></code></pre></div><h2 id="bước-2-cấu-hình-security-groups">Bước 2: Cấu hình Security Groups</h2>
+<h3 id="21-tạo-security-group-cho-rds">2.1. Tạo Security Group cho RDS</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Create security group</span>
+</span></span><span style="display:flex;"><span>aws ec2 create-security-group <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --group-name rds-modernized-sg <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --description <span style="color:#e6db74">&#34;Security group for modernized RDS instance&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get security group ID</span>
+</span></span><span style="display:flex;"><span>RDS_SG_ID<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>aws ec2 describe-security-groups <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --group-names rds-modernized-sg <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --query <span style="color:#e6db74">&#39;SecurityGroups[0].GroupId&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --output text<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Allow MySQL access from API wrapper instances</span>
+</span></span><span style="display:flex;"><span>aws ec2 authorize-security-group-ingress <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --group-id $RDS_SG_ID <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --protocol tcp <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --port <span style="color:#ae81ff">3306</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --source-group &lt;api-wrapper-security-group-id&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Allow MySQL access from your IP for management</span>
+</span></span><span style="display:flex;"><span>aws ec2 authorize-security-group-ingress <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --group-id $RDS_SG_ID <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --protocol tcp <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --port <span style="color:#ae81ff">3306</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --cidr &lt;your-ip&gt;/32
+</span></span></code></pre></div><h2 id="bước-3-thiết-lập-database-schema">Bước 3: Thiết lập Database Schema</h2>
+<h3 id="31-kết-nối-với-rds-instance">3.1. Kết nối với RDS instance</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Get RDS endpoint</span>
+</span></span><span style="display:flex;"><span>RDS_ENDPOINT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>aws rds describe-db-instances <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-instance-identifier modernized-mysql-db <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --query <span style="color:#e6db74">&#39;DBInstances[0].Endpoint.Address&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --output text<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Connect to RDS</span>
+</span></span><span style="display:flex;"><span>mysql -h $RDS_ENDPOINT -u admin -p
+</span></span></code></pre></div><h3 id="32-tạo-database-schema">3.2. Tạo database schema</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- Create database
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> modernized_db;
+</span></span><span style="display:flex;"><span>USE modernized_db;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- Create customers table
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> customers (
+</span></span><span style="display:flex;"><span>    id INT AUTO_INCREMENT <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    name VARCHAR(<span style="color:#ae81ff">100</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    email VARCHAR(<span style="color:#ae81ff">100</span>) <span style="color:#66d9ef">UNIQUE</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    phone VARCHAR(<span style="color:#ae81ff">20</span>),
+</span></span><span style="display:flex;"><span>    address TEXT,
+</span></span><span style="display:flex;"><span>    created_at <span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>,
+</span></span><span style="display:flex;"><span>    updated_at <span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span> <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">UPDATE</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- Add indexes for performance
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">INDEX</span> idx_email (email),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">INDEX</span> idx_name (name),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">INDEX</span> idx_created_at (created_at)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- Create products table
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> products (
+</span></span><span style="display:flex;"><span>    id INT AUTO_INCREMENT <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    name VARCHAR(<span style="color:#ae81ff">100</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    description TEXT,
+</span></span><span style="display:flex;"><span>    price DECIMAL(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    stock_quantity INT <span style="color:#66d9ef">DEFAULT</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    category VARCHAR(<span style="color:#ae81ff">50</span>),
+</span></span><span style="display:flex;"><span>    created_at <span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>,
+</span></span><span style="display:flex;"><span>    updated_at <span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span> <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">UPDATE</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- Add indexes for performance
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">INDEX</span> idx_category (category),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">INDEX</span> idx_price (price),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">INDEX</span> idx_name (name),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">INDEX</span> idx_created_at (created_at)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- Create orders table
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> orders (
+</span></span><span style="display:flex;"><span>    id INT AUTO_INCREMENT <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    customer_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    total_amount DECIMAL(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    status ENUM(<span style="color:#e6db74">&#39;pending&#39;</span>, <span style="color:#e6db74">&#39;processing&#39;</span>, <span style="color:#e6db74">&#39;shipped&#39;</span>, <span style="color:#e6db74">&#39;delivered&#39;</span>, <span style="color:#e6db74">&#39;cancelled&#39;</span>) <span style="color:#66d9ef">DEFAULT</span> <span style="color:#e6db74">&#39;pending&#39;</span>,
+</span></span><span style="display:flex;"><span>    order_date <span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- Add foreign key constraint
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (customer_id) <span style="color:#66d9ef">REFERENCES</span> customers(id) <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">CASCADE</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- Add indexes for performance
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">INDEX</span> idx_customer_id (customer_id),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">INDEX</span> idx_status (status),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">INDEX</span> idx_order_date (order_date)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- Create order_items table
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> order_items (
+</span></span><span style="display:flex;"><span>    id INT AUTO_INCREMENT <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    order_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    product_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    quantity INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    unit_price DECIMAL(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- Add foreign key constraints
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (order_id) <span style="color:#66d9ef">REFERENCES</span> orders(id) <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">CASCADE</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (product_id) <span style="color:#66d9ef">REFERENCES</span> products(id) <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">CASCADE</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- Add indexes for performance
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">INDEX</span> idx_order_id (order_id),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">INDEX</span> idx_product_id (product_id)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- Create audit table for tracking changes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> audit_log (
+</span></span><span style="display:flex;"><span>    id INT AUTO_INCREMENT <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">table_name</span> VARCHAR(<span style="color:#ae81ff">50</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">operation</span> VARCHAR(<span style="color:#ae81ff">10</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    record_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    old_values JSON,
+</span></span><span style="display:flex;"><span>    new_values JSON,
+</span></span><span style="display:flex;"><span>    changed_by VARCHAR(<span style="color:#ae81ff">100</span>),
+</span></span><span style="display:flex;"><span>    changed_at <span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CURRENT_TIMESTAMP</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">INDEX</span> idx_table_name (<span style="color:#66d9ef">table_name</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">INDEX</span> idx_changed_at (changed_at)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><h3 id="33-tạo-database-user-cho-application">3.3. Tạo database user cho application</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- Create application user
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">USER</span> <span style="color:#e6db74">&#39;app_user&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span> IDENTIFIED <span style="color:#66d9ef">BY</span> <span style="color:#e6db74">&#39;SecureAppPassword123!&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- Grant permissions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">SELECT</span>, <span style="color:#66d9ef">INSERT</span>, <span style="color:#66d9ef">UPDATE</span>, <span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">ON</span> modernized_db.<span style="color:#f92672">*</span> <span style="color:#66d9ef">TO</span> <span style="color:#e6db74">&#39;app_user&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span>;
+</span></span><span style="display:flex;"><span>FLUSH <span style="color:#66d9ef">PRIVILEGES</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- Create read-only user for reporting
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">USER</span> <span style="color:#e6db74">&#39;report_user&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span> IDENTIFIED <span style="color:#66d9ef">BY</span> <span style="color:#e6db74">&#39;SecureReportPassword123!&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">ON</span> modernized_db.<span style="color:#f92672">*</span> <span style="color:#66d9ef">TO</span> <span style="color:#e6db74">&#39;report_user&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span>;
+</span></span><span style="display:flex;"><span>FLUSH <span style="color:#66d9ef">PRIVILEGES</span>;
+</span></span></code></pre></div><h2 id="bước-4-cấu-hình-backup-và-maintenance">Bước 4: Cấu hình Backup và Maintenance</h2>
+<h3 id="41-cấu-hình-automated-backup">4.1. Cấu hình automated backup</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Modify DB instance to enable automated backups</span>
+</span></span><span style="display:flex;"><span>aws rds modify-db-instance <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-instance-identifier modernized-mysql-db <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --backup-retention-period <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --preferred-backup-window <span style="color:#e6db74">&#34;03:00-04:00&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --preferred-maintenance-window <span style="color:#e6db74">&#34;sun:04:00-sun:05:00&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --apply-immediately
+</span></span></code></pre></div><h3 id="42-tạo-manual-snapshot">4.2. Tạo manual snapshot</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Create manual snapshot</span>
+</span></span><span style="display:flex;"><span>aws rds create-db-snapshot <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-instance-identifier modernized-mysql-db <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-snapshot-identifier modernized-mysql-snapshot-<span style="color:#66d9ef">$(</span>date +%Y%m%d<span style="color:#66d9ef">)</span>
+</span></span></code></pre></div><h2 id="bước-5-cấu-hình-parameter-groups">Bước 5: Cấu hình Parameter Groups</h2>
+<h3 id="51-tạo-custom-parameter-group">5.1. Tạo custom parameter group</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Create parameter group</span>
+</span></span><span style="display:flex;"><span>aws rds create-db-parameter-group <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-parameter-group-name modernized-mysql-params <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-parameter-group-family mysql8.0 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --description <span style="color:#e6db74">&#34;Custom parameter group for modernized MySQL&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set parameters for better performance</span>
+</span></span><span style="display:flex;"><span>aws rds modify-db-parameter-group <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-parameter-group-name modernized-mysql-params <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --parameters <span style="color:#e6db74">&#34;ParameterName=innodb_buffer_pool_size,ParameterValue={DBInstanceClassMemory*3/4},ApplyMethod=pending-reboot&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>aws rds modify-db-parameter-group <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-parameter-group-name modernized-mysql-params <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --parameters <span style="color:#e6db74">&#34;ParameterName=slow_query_log,ParameterValue=1,ApplyMethod=immediate&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>aws rds modify-db-parameter-group <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-parameter-group-name modernized-mysql-params <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --parameters <span style="color:#e6db74">&#34;ParameterName=long_query_time,ParameterValue=2,ApplyMethod=immediate&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply parameter group to instance</span>
+</span></span><span style="display:flex;"><span>aws rds modify-db-instance <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-instance-identifier modernized-mysql-db <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-parameter-group-name modernized-mysql-params
+</span></span></code></pre></div><h2 id="bước-6-monitoring-và-alerts">Bước 6: Monitoring và Alerts</h2>
+<h3 id="61-thiết-lập-cloudwatch-alarms">6.1. Thiết lập CloudWatch alarms</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># CPU utilization alarm</span>
+</span></span><span style="display:flex;"><span>aws cloudwatch put-metric-alarm <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --alarm-name <span style="color:#e6db74">&#34;RDS-CPU-Utilization-High&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --alarm-description <span style="color:#e6db74">&#34;RDS CPU utilization is too high&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --metric-name CPUUtilization <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --namespace AWS/RDS <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --statistic Average <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --period <span style="color:#ae81ff">300</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --threshold <span style="color:#ae81ff">80</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --comparison-operator GreaterThanThreshold <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --evaluation-periods <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --dimensions Name<span style="color:#f92672">=</span>DBInstanceIdentifier,Value<span style="color:#f92672">=</span>modernized-mysql-db
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Database connections alarm</span>
+</span></span><span style="display:flex;"><span>aws cloudwatch put-metric-alarm <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --alarm-name <span style="color:#e6db74">&#34;RDS-Database-Connections-High&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --alarm-description <span style="color:#e6db74">&#34;RDS database connections are too high&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --metric-name DatabaseConnections <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --namespace AWS/RDS <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --statistic Average <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --period <span style="color:#ae81ff">300</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --threshold <span style="color:#ae81ff">80</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --comparison-operator GreaterThanThreshold <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --evaluation-periods <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --dimensions Name<span style="color:#f92672">=</span>DBInstanceIdentifier,Value<span style="color:#f92672">=</span>modernized-mysql-db
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Free storage space alarm</span>
+</span></span><span style="display:flex;"><span>aws cloudwatch put-metric-alarm <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --alarm-name <span style="color:#e6db74">&#34;RDS-Free-Storage-Space-Low&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --alarm-description <span style="color:#e6db74">&#34;RDS free storage space is too low&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --metric-name FreeStorageSpace <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --namespace AWS/RDS <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --statistic Average <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --period <span style="color:#ae81ff">300</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --threshold <span style="color:#ae81ff">2000000000</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --comparison-operator LessThanThreshold <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --evaluation-periods <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --dimensions Name<span style="color:#f92672">=</span>DBInstanceIdentifier,Value<span style="color:#f92672">=</span>modernized-mysql-db
+</span></span></code></pre></div><h2 id="bước-7-testing-và-validation">Bước 7: Testing và Validation</h2>
+<h3 id="71-test-connection-từ-api-wrapper">7.1. Test connection từ API wrapper</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Update API wrapper .env file</span>
+</span></span><span style="display:flex;"><span>cat &gt; /home/ec2-user/api-wrapper/.env <span style="color:#e6db74">&lt;&lt; &#39;EOF&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># Database Configuration
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">DB_HOST=&lt;rds-endpoint&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">DB_PORT=3306
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">DB_USER=app_user
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">DB_PASSWORD=SecureAppPassword123!
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">DB_NAME=modernized_db
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># Flask Configuration
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">FLASK_ENV=production
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">FLASK_DEBUG=False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">SECRET_KEY=your-secret-key-here
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># AWS Configuration
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">AWS_REGION=us-east-1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">LOG_GROUP_NAME=api-wrapper-logs
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Restart API wrapper</span>
+</span></span><span style="display:flex;"><span>sudo systemctl restart api-wrapper
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Test connection</span>
+</span></span><span style="display:flex;"><span>curl http://&lt;api-server-ip&gt;:5000/health
+</span></span></code></pre></div><h3 id="72-performance-testing">7.2. Performance testing</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Create test script</span>
+</span></span><span style="display:flex;"><span>cat &gt; /home/ec2-user/test_rds.py <span style="color:#e6db74">&lt;&lt; &#39;EOF&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">import pymysql
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">import time
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">import statistics
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># Database connection
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">connection = pymysql.connect(
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    host=&#39;&lt;rds-endpoint&gt;&#39;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    user=&#39;app_user&#39;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    password=&#39;SecureAppPassword123!&#39;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    database=&#39;modernized_db&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">def test_query_performance():
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    query_times = []
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    for i in range(10):
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        start_time = time.time()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        with connection.cursor() as cursor:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            cursor.execute(&#34;SELECT COUNT(*) FROM customers&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            result = cursor.fetchone()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        end_time = time.time()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        query_times.append(end_time - start_time)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    print(f&#34;Average query time: {statistics.mean(query_times):.4f} seconds&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    print(f&#34;Min query time: {min(query_times):.4f} seconds&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    print(f&#34;Max query time: {max(query_times):.4f} seconds&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">if __name__ == &#34;__main__&#34;:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    test_query_performance()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    connection.close()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Run test</span>
+</span></span><span style="display:flex;"><span>cd /home/ec2-user/api-wrapper
+</span></span><span style="display:flex;"><span>source venv/bin/activate
+</span></span><span style="display:flex;"><span>python3 /home/ec2-user/test_rds.py
+</span></span></code></pre></div><h2 id="bước-8-backup-và-recovery-testing">Bước 8: Backup và Recovery Testing</h2>
+<h3 id="81-test-point-in-time-recovery">8.1. Test point-in-time recovery</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Create test data</span>
+</span></span><span style="display:flex;"><span>mysql -h &lt;rds-endpoint&gt; -u admin -p modernized_db <span style="color:#e6db74">&lt;&lt; &#39;EOF&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">INSERT INTO customers (name, email, phone, address) VALUES
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(&#39;Test Customer 1&#39;, &#39;test1@example.com&#39;, &#39;0123456789&#39;, &#39;Test Address 1&#39;),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(&#39;Test Customer 2&#39;, &#39;test2@example.com&#39;, &#39;0987654321&#39;, &#39;Test Address 2&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Note the current time</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Current time: </span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create point-in-time restore</span>
+</span></span><span style="display:flex;"><span>aws rds restore-db-instance-to-point-in-time <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --source-db-instance-identifier modernized-mysql-db <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --target-db-instance-identifier modernized-mysql-db-restored <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --restore-time <span style="color:#66d9ef">$(</span>date -u -d <span style="color:#e6db74">&#39;5 minutes ago&#39;</span> +%Y-%m-%dT%H:%M:%S.000Z<span style="color:#66d9ef">)</span>
+</span></span></code></pre></div><h3 id="82-test-snapshot-restore">8.2. Test snapshot restore</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Create snapshot</span>
+</span></span><span style="display:flex;"><span>aws rds create-db-snapshot <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-instance-identifier modernized-mysql-db <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-snapshot-identifier test-snapshot-<span style="color:#66d9ef">$(</span>date +%Y%m%d-%H%M%S<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Restore from snapshot</span>
+</span></span><span style="display:flex;"><span>aws rds restore-db-instance-from-db-snapshot <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-instance-identifier modernized-mysql-db-from-snapshot <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-snapshot-identifier test-snapshot-<span style="color:#66d9ef">$(</span>date +%Y%m%d-%H%M%S<span style="color:#66d9ef">)</span>
+</span></span></code></pre></div><h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-issues">Common Issues</h3>
+<ol>
+<li>
+<p><strong>Cannot connect to RDS</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Check security group rules</span>
+</span></span><span style="display:flex;"><span>aws ec2 describe-security-groups --group-ids &lt;security-group-id&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check RDS instance status</span>
+</span></span><span style="display:flex;"><span>aws rds describe-db-instances --db-instance-identifier modernized-mysql-db
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Performance issues</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Check CloudWatch metrics</span>
+</span></span><span style="display:flex;"><span>aws cloudwatch get-metric-statistics <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --namespace AWS/RDS <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --metric-name CPUUtilization <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --dimensions Name<span style="color:#f92672">=</span>DBInstanceIdentifier,Value<span style="color:#f92672">=</span>modernized-mysql-db <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --start-time <span style="color:#66d9ef">$(</span>date -u -d <span style="color:#e6db74">&#39;1 hour ago&#39;</span> +%Y-%m-%dT%H:%M:%S<span style="color:#66d9ef">)</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --end-time <span style="color:#66d9ef">$(</span>date -u +%Y-%m-%dT%H:%M:%S<span style="color:#66d9ef">)</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --period <span style="color:#ae81ff">300</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --statistics Average
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Storage issues</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Check storage metrics</span>
+</span></span><span style="display:flex;"><span>aws cloudwatch get-metric-statistics <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --namespace AWS/RDS <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --metric-name FreeStorageSpace <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --dimensions Name<span style="color:#f92672">=</span>DBInstanceIdentifier,Value<span style="color:#f92672">=</span>modernized-mysql-db <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --start-time <span style="color:#66d9ef">$(</span>date -u -d <span style="color:#e6db74">&#39;1 hour ago&#39;</span> +%Y-%m-%dT%H:%M:%S<span style="color:#66d9ef">)</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --end-time <span style="color:#66d9ef">$(</span>date -u +%Y-%m-%dT%H:%M:%S<span style="color:#66d9ef">)</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --period <span style="color:#ae81ff">300</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --statistics Average
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="useful-commands">Useful Commands</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Check RDS instance status</span>
+</span></span><span style="display:flex;"><span>aws rds describe-db-instances <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-instance-identifier modernized-mysql-db <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --query <span style="color:#e6db74">&#39;DBInstances[0].DBInstanceStatus&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get RDS endpoint</span>
+</span></span><span style="display:flex;"><span>aws rds describe-db-instances <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-instance-identifier modernized-mysql-db <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --query <span style="color:#e6db74">&#39;DBInstances[0].Endpoint.Address&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --output text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List all snapshots</span>
+</span></span><span style="display:flex;"><span>aws rds describe-db-snapshots <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --db-instance-identifier modernized-mysql-db
+</span></span></code></pre></div><p><img src="images/rds-architecture.png" alt="RDS Architecture"></p>
+<hr>
+<p><strong>Kết quả</strong>: Bạn đã thiết lập thành công Amazon RDS MySQL instance với các tính năng bảo mật, backup, monitoring và performance optimization. Database này sẽ được sử dụng để thay thế hệ thống legacy trong các bước tiếp theo.</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/vi/4-deploy-ecs-fargate/" title="Chương 4: Deploy ECS Fargate"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/vi/5-cloudwatch/" title="Chương 5: Monitoring với Amazon CloudWatch" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1752146990"></script>
+    <script src="/js/perfect-scrollbar.min.js?1752146990"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1752146990"></script>
+    <script src="/js/jquery.sticky.js?1752146990"></script>
+    <script src="/js/featherlight.min.js?1752146990"></script>
+    <script src="/js/highlight.pack.js?1752146990"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1752146990"></script>
+    <script src="/js/learn.js?1752146990"></script>
+    <script src="/js/hugo-learn.js?1752146990"></script>
+
+    <link href="/mermaid/mermaid.css?1752146990" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1752146990"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

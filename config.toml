@@ -1,0 +1,61 @@
+# Change the default theme to be use when building the site with Hugo
+theme = "hugo-theme-learn"
+
+# Base URL and language settings
+baseURL = "https://example.com/"
+defaultContentLanguage = "vi"
+defaultContentLanguageInSubdir = true
+
+# For search functionality
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
+[params]
+  themeVariant = "workshop"
+  editURL = ""
+  description = ""
+  author = "journeyoftheaverageguy@gmail.com"
+  showVisitedLinks = true
+  disableBreadcrumb = false
+  disableNextPrev = false
+
+[Languages]
+[Languages.vi]
+title = "Workshop: Triển khai ứng dụng với ECS Fargate và CI/CD"
+weight = 1
+languageName = "Tiếng Việt"
+contentDir = "content/vi"
+
+[[Languages.vi.menu.shortcuts]]
+name = "<i class='fab fa-aws'></i> AWS Study Group - Blog"
+identifier = "AWS Study Group"
+url = "http://awsstudygroup.com"
+weight = 20
+
+[[Languages.vi.menu.shortcuts]]
+name = "<i class='fab fa-facebook'></i> AWS Study Group - Nhóm FB"
+identifier = "AWS Study Group FB"
+url = "https://www.facebook.com/groups/awsstudygroupfcj"
+weight = 20
+
+[Languages.en]
+title = "Workshop: Deploy applications with ECS Fargate and CI/CD"
+weight = 2
+languageName = "English"
+contentDir = "content/en"
+
+[[Languages.en.menu.shortcuts]]
+name = "<i class='fab fa-aws'></i> AWS Study Group - Blog"
+identifier = "AWS Study Group"
+url = "https://aws.amazon.com/blogs"
+weight = 20
+
+[[Languages.en.menu.shortcuts]]
+name = "<i class='fab fa-facebook'></i> AWS Study Group - FB Group"
+identifier = "AWS Study Group FB"
+url = "https://www.facebook.com/groups/awsstudygroupfcj"
+weight = 20
+
+[server]
+port = 1313
+
