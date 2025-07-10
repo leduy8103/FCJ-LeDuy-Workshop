@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chương 4: Deploy ECS Fargate on Workshop: Triển khai ứng dụng với ECS Fargate và CI/CD</title>
-    <link>http://localhost:1313/vi/4-deploy-ecs-fargate/</link>
+    <link>https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/4-deploy-ecs-fargate/</link>
     <description>Recent content in Chương 4: Deploy ECS Fargate on Workshop: Triển khai ứng dụng với ECS Fargate và CI/CD</description>
     <generator>Hugo</generator>
     <language>vi</language>
-    <atom:link href="http://localhost:1313/vi/4-deploy-ecs-fargate/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/4-deploy-ecs-fargate/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
