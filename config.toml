@@ -2,7 +2,7 @@
 theme = "hugo-theme-learn"
 
 # Base URL and language settings
-baseURL = "https://example.com/"
+baseURL = "https://leduy8103.github.io/FCJ-LeDuy-Workshop/"
 defaultContentLanguage = "vi"
 defaultContentLanguageInSubdir = true
 
