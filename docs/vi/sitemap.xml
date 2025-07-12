@@ -2,112 +2,112 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/1-introduction/</loc>
+    <loc>http://localhost:1313/FCJ-LeDuy-Workshop/vi/1-introduction/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/en/1-introduction/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/en/1-introduction/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/1-introduction/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/vi/1-introduction/"
                 />
   </url><url>
-    <loc>https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/</loc>
+    <loc>http://localhost:1313/FCJ-LeDuy-Workshop/vi/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/en/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/vi/"
                 />
   </url><url>
-    <loc>https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/2-dockerize/</loc>
+    <loc>http://localhost:1313/FCJ-LeDuy-Workshop/vi/2-dockerize/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/en/2-dockerize/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/en/2-dockerize/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/2-dockerize/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/vi/2-dockerize/"
                 />
   </url><url>
-    <loc>https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/3-ecr/</loc>
+    <loc>http://localhost:1313/FCJ-LeDuy-Workshop/vi/3-ecr/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/en/3-ecr/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/en/3-ecr/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/3-ecr/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/vi/3-ecr/"
                 />
   </url><url>
-    <loc>https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/4-deploy-ecs-fargate/</loc>
+    <loc>http://localhost:1313/FCJ-LeDuy-Workshop/vi/4-deploy-ecs-fargate/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/en/4-deploy-ecs-fargate/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/en/4-deploy-ecs-fargate/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/4-deploy-ecs-fargate/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/vi/4-deploy-ecs-fargate/"
                 />
   </url><url>
-    <loc>https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/5-cloudwatch/</loc>
+    <loc>http://localhost:1313/FCJ-LeDuy-Workshop/vi/5-cloudwatch/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/en/5-cloudwatch/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/en/5-cloudwatch/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/5-cloudwatch/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/vi/5-cloudwatch/"
                 />
   </url><url>
-    <loc>https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/6-github-actions/</loc>
+    <loc>http://localhost:1313/FCJ-LeDuy-Workshop/vi/6-github-actions/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/en/6-github-actions/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/en/6-github-actions/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/6-github-actions/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/vi/6-github-actions/"
                 />
   </url><url>
-    <loc>https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/categories/</loc>
+    <loc>http://localhost:1313/FCJ-LeDuy-Workshop/vi/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/en/categories/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/categories/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/vi/categories/"
                 />
   </url><url>
-    <loc>https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/tags/</loc>
+    <loc>http://localhost:1313/FCJ-LeDuy-Workshop/vi/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/en/tags/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/tags/"
+                href="http://localhost:1313/FCJ-LeDuy-Workshop/vi/tags/"
                 />
   </url>
 </urlset>

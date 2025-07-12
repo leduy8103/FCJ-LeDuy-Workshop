@@ -119,31 +119,6 @@ steps:
       aws-region: ${{ secrets.AWS_REGION }}
 ```
 
-### Using AWS CLI
-
-#### Login to ECR
-
-```bash
-aws ecr get-login-password --region <AWS_REGION> | docker login --username AWS --password-stdin <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com
-```
-
-#### Build and push images
-
-```bash
-# Frontend
-docker build -t frontend-app ./frontend-app
-
-docker tag frontend-app:latest <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/frontend-app:latest
-
-docker push <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/frontend-app:latest
-
-# Backend
-docker build -t backend-app ./backend-app
-
-docker tag backend-app:latest <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/backend-app:latest
-
-docker push <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/backend-app:latest
-```
 
 ### Check results
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi" class="js csstransforms3d">
-  <head>
+  <head><script src="/FCJ-LeDuy-Workshop/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=FCJ-LeDuy-Workshop/livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="Hugo 0.147.9">
@@ -12,21 +12,21 @@
     <title>Chương 3: Tạo ECR repositories và đẩy image :: Workshop: Triển khai ứng dụng với ECS Fargate và CI/CD</title>
 
     
-    <link href="/FCJ-LeDuy-Workshop/css/nucleus.css?1752308583" rel="stylesheet">
-    <link href="/FCJ-LeDuy-Workshop/css/fontawesome-all.min.css?1752308583" rel="stylesheet">
-    <link href="/FCJ-LeDuy-Workshop/css/hybrid.css?1752308583" rel="stylesheet">
-    <link href="/FCJ-LeDuy-Workshop/css/featherlight.min.css?1752308583" rel="stylesheet">
-    <link href="/FCJ-LeDuy-Workshop/css/perfect-scrollbar.min.css?1752308583" rel="stylesheet">
-    <link href="/FCJ-LeDuy-Workshop/css/auto-complete.css?1752308583" rel="stylesheet">
-    <link href="/FCJ-LeDuy-Workshop/css/atom-one-dark-reasonable.css?1752308583" rel="stylesheet">
-    <link href="/FCJ-LeDuy-Workshop/css/theme.css?1752308583" rel="stylesheet">
-    <link href="/FCJ-LeDuy-Workshop/css/hugo-theme.css?1752308583" rel="stylesheet">
+    <link href="/FCJ-LeDuy-Workshop/css/nucleus.css?1752309205" rel="stylesheet">
+    <link href="/FCJ-LeDuy-Workshop/css/fontawesome-all.min.css?1752309205" rel="stylesheet">
+    <link href="/FCJ-LeDuy-Workshop/css/hybrid.css?1752309205" rel="stylesheet">
+    <link href="/FCJ-LeDuy-Workshop/css/featherlight.min.css?1752309205" rel="stylesheet">
+    <link href="/FCJ-LeDuy-Workshop/css/perfect-scrollbar.min.css?1752309205" rel="stylesheet">
+    <link href="/FCJ-LeDuy-Workshop/css/auto-complete.css?1752309205" rel="stylesheet">
+    <link href="/FCJ-LeDuy-Workshop/css/atom-one-dark-reasonable.css?1752309205" rel="stylesheet">
+    <link href="/FCJ-LeDuy-Workshop/css/theme.css?1752309205" rel="stylesheet">
+    <link href="/FCJ-LeDuy-Workshop/css/hugo-theme.css?1752309205" rel="stylesheet">
     
-    <link href="/FCJ-LeDuy-Workshop/css/theme-workshop.css?1752308583" rel="stylesheet">
+    <link href="/FCJ-LeDuy-Workshop/css/theme-workshop.css?1752309205" rel="stylesheet">
     
     
 
-    <script src="/FCJ-LeDuy-Workshop/js/jquery-3.3.1.min.js?1752308583"></script>
+    <script src="/FCJ-LeDuy-Workshop/js/jquery-3.3.1.min.js?1752309205"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/FCJ-LeDuy-Workshop/js/lunr.min.js?1752308583"></script>
-<script type="text/javascript" src="/FCJ-LeDuy-Workshop/js/auto-complete.js?1752308583"></script>
+<script type="text/javascript" src="/FCJ-LeDuy-Workshop/js/lunr.min.js?1752309205"></script>
+<script type="text/javascript" src="/FCJ-LeDuy-Workshop/js/auto-complete.js?1752309205"></script>
 <script type="text/javascript">
     
-        var baseurl = "https:\/\/leduy8103.github.io\/FCJ-LeDuy-Workshop\/\/vi";
+        var baseurl = "http:\/\/localhost:1313\/FCJ-LeDuy-Workshop\/\/vi";
     
 </script>
-<script type="text/javascript" src="/FCJ-LeDuy-Workshop/js/search.js?1752308583"></script>
+<script type="text/javascript" src="/FCJ-LeDuy-Workshop/js/search.js?1752309205"></script>
 
     
   </div>
@@ -269,7 +269,7 @@
                   
                     
                     
-                      <option id="vi" value="https://leduy8103.github.io/FCJ-LeDuy-Workshop/vi/3-ecr/" selected>Tiếng Việt</option>
+                      <option id="vi" value="http://localhost:1313/FCJ-LeDuy-Workshop/vi/3-ecr/" selected>Tiếng Việt</option>
                     
                   
               
@@ -283,7 +283,7 @@
                   
                     
                     
-                      <option id="en" value="https://leduy8103.github.io/FCJ-LeDuy-Workshop/en/3-ecr/">English</option>
+                      <option id="en" value="http://localhost:1313/FCJ-LeDuy-Workshop/en/3-ecr/">English</option>
                     
                   
               
@@ -391,7 +391,6 @@
       <ul>
         <li><a href="#sử-dụng-github-actions">Sử dụng GitHub Actions</a></li>
         <li><a href="#thiết-lập-secrets-trên-github">Thiết lập secrets trên GitHub</a></li>
-        <li><a href="#sử-dụng-aws-cli">Sử dụng AWS CLI</a></li>
         <li><a href="#kiểm-tra-kết-quả">Kiểm tra kết quả</a></li>
       </ul>
     </li>
@@ -529,23 +528,6 @@
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">aws-access-key-id</span>: <span style="color:#ae81ff">${{ secrets.AWS_ACCESS_KEY_ID }}</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">aws-secret-access-key</span>: <span style="color:#ae81ff">${{ secrets.AWS_SECRET_ACCESS_KEY }}</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">aws-region</span>: <span style="color:#ae81ff">${{ secrets.AWS_REGION }}</span>
-</span></span></code></pre></div><h3 id="sử-dụng-aws-cli">Sử dụng AWS CLI</h3>
-<h4 id="đăng-nhập-vào-ecr">Đăng nhập vào ECR</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws ecr get-login-password --region &lt;AWS_REGION&gt; | docker login --username AWS --password-stdin &lt;AWS_ACCOUNT_ID&gt;.dkr.ecr.&lt;AWS_REGION&gt;.amazonaws.com
-</span></span></code></pre></div><h4 id="build-và-push-image">Build và push image</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Frontend</span>
-</span></span><span style="display:flex;"><span>docker build -t frontend-app ./frontend-app
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>docker tag frontend-app:latest &lt;AWS_ACCOUNT_ID&gt;.dkr.ecr.&lt;AWS_REGION&gt;.amazonaws.com/frontend-app:latest
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>docker push &lt;AWS_ACCOUNT_ID&gt;.dkr.ecr.&lt;AWS_REGION&gt;.amazonaws.com/frontend-app:latest
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Backend</span>
-</span></span><span style="display:flex;"><span>docker build -t backend-app ./backend-app
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>docker tag backend-app:latest &lt;AWS_ACCOUNT_ID&gt;.dkr.ecr.&lt;AWS_REGION&gt;.amazonaws.com/backend-app:latest
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>docker push &lt;AWS_ACCOUNT_ID&gt;.dkr.ecr.&lt;AWS_REGION&gt;.amazonaws.com/backend-app:latest
 </span></span></code></pre></div><h3 id="kiểm-tra-kết-quả">Kiểm tra kết quả</h3>
 <ul>
 <li>Truy cập AWS Management Console để kiểm tra các image đã được đẩy lên repository.</li>
@@ -711,19 +693,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/FCJ-LeDuy-Workshop/js/clipboard.min.js?1752308583"></script>
-    <script src="/FCJ-LeDuy-Workshop/js/perfect-scrollbar.min.js?1752308583"></script>
-    <script src="/FCJ-LeDuy-Workshop/js/perfect-scrollbar.jquery.min.js?1752308583"></script>
-    <script src="/FCJ-LeDuy-Workshop/js/jquery.sticky.js?1752308583"></script>
-    <script src="/FCJ-LeDuy-Workshop/js/featherlight.min.js?1752308583"></script>
-    <script src="/FCJ-LeDuy-Workshop/js/highlight.pack.js?1752308583"></script>
+    <script src="/FCJ-LeDuy-Workshop/js/clipboard.min.js?1752309205"></script>
+    <script src="/FCJ-LeDuy-Workshop/js/perfect-scrollbar.min.js?1752309205"></script>
+    <script src="/FCJ-LeDuy-Workshop/js/perfect-scrollbar.jquery.min.js?1752309205"></script>
+    <script src="/FCJ-LeDuy-Workshop/js/jquery.sticky.js?1752309205"></script>
+    <script src="/FCJ-LeDuy-Workshop/js/featherlight.min.js?1752309205"></script>
+    <script src="/FCJ-LeDuy-Workshop/js/highlight.pack.js?1752309205"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/FCJ-LeDuy-Workshop/js/modernizr.custom-3.6.0.js?1752308583"></script>
-    <script src="/FCJ-LeDuy-Workshop/js/learn.js?1752308583"></script>
-    <script src="/FCJ-LeDuy-Workshop/js/hugo-learn.js?1752308583"></script>
+    <script src="/FCJ-LeDuy-Workshop/js/modernizr.custom-3.6.0.js?1752309205"></script>
+    <script src="/FCJ-LeDuy-Workshop/js/learn.js?1752309205"></script>
+    <script src="/FCJ-LeDuy-Workshop/js/hugo-learn.js?1752309205"></script>
 
-    <link href="/FCJ-LeDuy-Workshop/mermaid/mermaid.css?1752308583" rel="stylesheet" />
-    <script src="/FCJ-LeDuy-Workshop/mermaid/mermaid.js?1752308583"></script>
+    <link href="/FCJ-LeDuy-Workshop/mermaid/mermaid.css?1752309205" rel="stylesheet" />
+    <script src="/FCJ-LeDuy-Workshop/mermaid/mermaid.js?1752309205"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
