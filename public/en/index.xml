@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Workshop: Deploy applications with ECS Fargate and CI/CD</title>
+    <link>http://localhost:1313/FCJ-LeDuy-Workshop/en/</link>
+    <description>Recent content on Workshop: Deploy applications with ECS Fargate and CI/CD</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="http://localhost:1313/FCJ-LeDuy-Workshop/en/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

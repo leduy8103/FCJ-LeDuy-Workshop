@@ -58,6 +58,6 @@ Below is the overall system architecture diagram:
 - **Application Load Balancer**: Distribute traffic.
 - **CloudWatch**: Log and monitor.
 
-![Overall Architecture](/images/architecture.png)
+![Overall Architecture](/FCJ-LeDuy-Workshop/images/architecture.png)
 
 > **Tip**: Make sure you have an AWS account and understand the basics of AWS services before starting.

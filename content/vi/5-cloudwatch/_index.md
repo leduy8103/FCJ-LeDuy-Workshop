@@ -26,7 +26,7 @@ Trong chương này, bạn sẽ học cách sử dụng **Amazon CloudWatch** đ
 | `CPUUtilization` | Tỷ lệ CPU đang sử dụng |
 | `MemoryUtilization` | Bộ nhớ sử dụng |
 
-![Elastic Container Registry](/images/cloudwatch-metrics.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/cloudwatch-metrics.png)
 
 
 ---
@@ -44,11 +44,11 @@ Trong chương này, bạn sẽ học cách sử dụng **Amazon CloudWatch** đ
 5. Tùy chọn: gửi cảnh báo qua SNS hoặc email
 6. Preview cầu hình → chọn "Create Alarm"
 
-![Elastic Container Registry](/images/select-alarm-metrics.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/select-alarm-metrics.png)
 
-![Elastic Container Registry](/images/select-alarm-condition.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/select-alarm-condition.png)
 
-![Elastic Container Registry](/images/create-alarm-success.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/create-alarm-success.png)
 
 > **Gợi ý**: Tạo thêm alarm cho `MemoryUtilization` nếu bạn nghi ngờ có rò rỉ bộ nhớ (memory leak).
 
@@ -68,7 +68,7 @@ Trong chương này, bạn sẽ học cách sử dụng **Amazon CloudWatch** đ
 
 4. Lưu lại và sử dụng để giám sát trực quan
 
-![Elastic Container Registry](/images/cloudwatch-dashboard.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/cloudwatch-dashboard.png)
 
 ---
 
@@ -80,7 +80,7 @@ Nếu cần kiểm tra lỗi:
 2. Chọn log groups muốn xem
 3. Click log stream mới nhất → xem log chi tiết
 
-![Elastic Container Registry](/images/log-groups.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/log-groups.png)
 
 > 🔧 Log driver được cấu hình mặc định trong task definition ở bước trước.
 

@@ -10,13 +10,13 @@ weight: 3
 1. Truy cập AWS Management Console.
 2. Điều hướng đến **ECR (Elastic Container Registry)**.
 
-![Elastic Container Registry](/images/find-ecr.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/find-ecr.png)
 
 3. Tạo 2 repository:
    - `frontend-app`
-   ![Elastic Container Registry](/images/create-ecr-repo.png)
+   ![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/create-ecr-repo.png)
    - `backend-app`
-   ![Elastic Container Registry](/images/create-ecr-repo-be.png)
+   ![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/create-ecr-repo-be.png)
 
 > **Tip**: Đặt tên repository rõ ràng để dễ quản lý.
 
@@ -86,7 +86,7 @@ jobs:
 1. Truy cập repository của bạn trên GitHub.
 2. Điều hướng đến **Settings** > **Secrets and variables** > **Actions**.
 
-![Elastic Container Registry](/images/setup-secret-github.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/setup-secret-github.png)
 
 3. Nhấn **New repository secret** để thêm secrets mới.
 4. Thêm các secrets cần thiết:
@@ -95,7 +95,7 @@ jobs:
    - `AWS_ACCESS_KEY_ID`: Access key ID của IAM user hoặc role.
    - `AWS_SECRET_ACCESS_KEY`: Secret access key của IAM user hoặc role.
 
-   ![Elastic Container Registry](/images/secret-env.png)
+   ![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/secret-env.png)
 
 > **Cảnh báo**: Đảm bảo rằng các secrets này được bảo mật và không chia sẻ công khai.
 

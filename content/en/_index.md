@@ -35,7 +35,7 @@ This workshop will take approximately 2-3 hours to complete.
 
 ## System Architecture
 
-![Workshop Architecture](images/workshop-architecture.png)
+![Workshop Architecture](/FCJ-LeDuy-Workshop/images/workshop-architecture.png)
 
 The system includes:
 - **Frontend**: React application

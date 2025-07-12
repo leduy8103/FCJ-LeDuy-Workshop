@@ -35,7 +35,7 @@ Workshop này sẽ mất khoảng 2-3 giờ để hoàn thành.
 
 ## Kiến trúc hệ thống
 
-![Workshop Architecture](images/workshop-architecture.png)
+![Workshop Architecture](/FCJ-LeDuy-Workshop/images/workshop-architecture.png)
 
 Hệ thống bao gồm:
 - **Frontend**: React application

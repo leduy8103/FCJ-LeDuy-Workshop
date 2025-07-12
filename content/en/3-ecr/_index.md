@@ -10,13 +10,13 @@ weight: 3
 1. Access AWS Management Console.
 2. Navigate to **ECR (Elastic Container Registry)**.
 
-![Elastic Container Registry](/images/find-ecr.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/find-ecr.png)
 
 3. Create 2 repositories:
    - `frontend-app`
-   ![Elastic Container Registry](/images/create-ecr-repo.png)
+   ![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/create-ecr-repo.png)
    - `backend-app`
-   ![Elastic Container Registry](/images/create-ecr-repo-be.png)
+   ![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/create-ecr-repo-be.png)
 
 > **Tip**: Name repositories clearly for easy management.
 
@@ -86,7 +86,7 @@ To use secrets in GitHub Actions, you need to set up secrets in your repository.
 1. Access your repository on GitHub.
 2. Navigate to **Settings** > **Secrets and variables** > **Actions**.
 
-![Elastic Container Registry](/images/setup-secret-github.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/setup-secret-github.png)
 
 3. Click **New repository secret** to add new secrets.
 4. Add the necessary secrets:
@@ -95,7 +95,7 @@ To use secrets in GitHub Actions, you need to set up secrets in your repository.
    - `AWS_ACCESS_KEY_ID`: Access key ID of IAM user or role.
    - `AWS_SECRET_ACCESS_KEY`: Secret access key of IAM user or role.
 
-   ![Elastic Container Registry](/images/secret-env.png)
+   ![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/secret-env.png)
 
 > **Warning**: Make sure these secrets are secure and not shared publicly.
 

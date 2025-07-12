@@ -58,6 +58,6 @@ Dưới đây là sơ đồ kiến trúc tổng quát của hệ thống:
 - **Application Load Balancer**: Phân phối traffic.
 - **CloudWatch**: Ghi log và giám sát.
 
-![Kiến trúc tổng quát](/images/architecture.png)
+![Kiến trúc tổng quát](/FCJ-LeDuy-Workshop/images/architecture.png)
 
 > **Tip**: Đảm bảo bạn đã có tài khoản AWS và hiểu cơ bản về các dịch vụ AWS trước khi bắt đầu.

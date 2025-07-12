@@ -26,7 +26,7 @@ In this chapter, you will learn how to use **Amazon CloudWatch** to monitor the 
 | `CPUUtilization` | CPU usage percentage |
 | `MemoryUtilization` | Memory usage |
 
-![Elastic Container Registry](/images/cloudwatch-metrics.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/cloudwatch-metrics.png)
 
 ---
 
@@ -43,11 +43,11 @@ In this chapter, you will learn how to use **Amazon CloudWatch** to monitor the 
 5. Optional: send alerts via SNS or email
 6. Preview configuration → select "Create Alarm"
 
-![Elastic Container Registry](/images/select-alarm-metrics.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/select-alarm-metrics.png)
 
-![Elastic Container Registry](/images/select-alarm-condition.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/select-alarm-condition.png)
 
-![Elastic Container Registry](/images/create-alarm-success.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/create-alarm-success.png)
 
 > **Tip**: Create additional alarms for `MemoryUtilization` if you suspect memory leaks.
 
@@ -67,7 +67,7 @@ In this chapter, you will learn how to use **Amazon CloudWatch** to monitor the 
 
 4. Save and use for visual monitoring
 
-![Elastic Container Registry](/images/cloudwatch-dashboard.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/cloudwatch-dashboard.png)
 
 ---
 
@@ -79,7 +79,7 @@ If you need to check errors:
 2. Select log groups to view
 3. Click latest log stream → view detailed logs
 
-![Elastic Container Registry](/images/log-groups.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/log-groups.png)
 
 > 🔧 Log driver is configured by default in task definition from previous step.
 

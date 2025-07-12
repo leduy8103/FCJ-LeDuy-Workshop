@@ -12,13 +12,13 @@ Trong chương này, bạn sẽ học cách triển khai ứng dụng frontend v
 ## Bước 1: Tạo ECS Cluster
 
 1. Truy cập AWS Console → tìm **ECS**
-![Elastic Container Registry](/images/find-ecs.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/find-ecs.png)
 2. Chọn **Clusters** → nhấn **Create Cluster**
 3. Chọn loại cluster: `Networking only (Fargate)`
 4. Đặt tên: `workshop-cluster-81`
 5. Nhấn **Create**
 
-![Elastic Container Registry](/images/create-ecs-cluster.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/create-ecs-cluster.png)
 > ✅ Cluster sẽ không có EC2 instance vì bạn đang dùng Fargate (serverless).
 
 ---
@@ -31,13 +31,13 @@ Bạn cần tạo **2 task definitions** – một cho frontend và một cho ba
 
 1. ECS → **Task Definitions** → **Create new Task Definition**
 
-![Elastic Container Registry](/images/choose-create-task.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/choose-create-task.png)
 
 2. Launch type: `Fargate`
 3. Task name: `frontend-task`
 4. CPU: `0.5 vCPU`, Memory: `1 GB`
 
-![Elastic Container Registry](/images/config-task-fe-1.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/config-task-fe-1.png)
 
 5. Nhấn **Add container**:
    - Container name: `frontend`
@@ -47,7 +47,7 @@ Bạn cần tạo **2 task definitions** – một cho frontend và một cho ba
      ```
    - Port mappings: `80`
 
-   ![Elastic Container Registry](/images/config-task-fe-2.png)
+   ![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/config-task-fe-2.png)
 
 6. Nhấn **Create**
 
@@ -62,7 +62,7 @@ Lặp lại các bước trên với:
 
 
 > ✅ Tạo thành công backend-task và frontend-task.
-![Elastic Container Registry](/images/created-task-fe-be.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/created-task-fe-be.png)
 
 ---
 
@@ -82,7 +82,7 @@ Nếu bạn chưa có VPC phù hợp, hãy tạo VPC theo các bước sau:
 
 > ⚠️ Chỉ frontend cần truy cập internet (public subnet). Backend có thể đặt trong private subnet.
 
-![Elastic Container Registry](/images/vpc.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/vpc.png)
 
 ---
 
@@ -96,7 +96,7 @@ Nếu bạn chưa có VPC phù hợp, hãy tạo VPC theo các bước sau:
  - Source: 0.0.0.0/0
 4. Outbound: giữ mặc định (Allow all)
 
-![Elastic Container Registry](/images/frontend-sg.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/frontend-sg.png)
 
 Tạo thêm `backend-sg`:
 - Inbound:
@@ -104,7 +104,7 @@ Tạo thêm `backend-sg`:
 - Source: `frontend-sg` (chọn từ group list)
 - Outbound: mặc định
 
-![Elastic Container Registry](/images/backend-sg.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/backend-sg.png)
 
 ---
 
@@ -125,11 +125,11 @@ Tạo thêm `backend-sg`:
    - Tích **Enable public IP**
 4. Nhấn **Create Service**
 
-![Elastic Container Registry](/images/fe-service-detail.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/fe-service-detail.png)
 
-![Elastic Container Registry](/images/fe-service-networking.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/fe-service-networking.png)
 
-![Elastic Container Registry](/images/create-fe-service-success.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/create-fe-service-success.png)
 
 
 ### 5.2. Tạo Backend Service
@@ -141,11 +141,11 @@ Lặp lại các bước trên, với:
 - SG: `backend-sg`
 - Không cần public IP nếu không gọi trực tiếp từ trình duyệt
 
-![Elastic Container Registry](/images/be-service-detail.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/be-service-detail.png)
 
-![Elastic Container Registry](/images/be-service-networking.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/be-service-networking.png)
 
-![Elastic Container Registry](/images/create-be-service-success.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/create-be-service-success.png)
 
 ---
 
@@ -156,7 +156,7 @@ Sau khi tạo xong:
 - ECS sẽ chạy 2 task trong 2 service.
 - Vào **ECS > Clusters > Tasks** để kiểm tra trạng thái RUNNING
 
-![Elastic Container Registry](/images/review-fe-service.png)
+![Elastic Container Registry](/FCJ-LeDuy-Workshop/images/review-fe-service.png)
 
 > Nếu không thấy, kiểm tra lại Security Group và ECR image đã push đúng chưa.
 
